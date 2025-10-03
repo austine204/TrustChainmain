@@ -100,23 +100,45 @@ export function ActiveDeliveryCard({ delivery, onUpdate }: ActiveDeliveryCardPro
       });
 
       if (newStatus === 'delivered') {
-        const { error: profileError } = await supabase.rpc('increment', {
-          table_name: 'profiles',
-          row_id: user!.id,
-          column_name: 'total_deliveries',
-        });
+        try {
+          const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+          const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+          const { data: session } = await supabase.auth.getSession();
 
-        if (profileError) console.error('Error updating delivery count:', profileError);
+          const releaseResponse = await fetch(
+            `${supabaseUrl}/functions/v1/release-escrow-payment`,
+            {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${session.session?.access_token || supabaseAnonKey}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                orderId: order.id,
+                driverId: user!.id,
+              }),
+            }
+          );
 
-        const { error: paymentError } = await supabase
-          .from('payments')
-          .update({
-            status: 'released',
-            released_at: new Date().toISOString(),
-          })
-          .eq('order_id', order.id);
+          if (!releaseResponse.ok) {
+            console.error('Error releasing payment:', await releaseResponse.text());
+          }
 
-        if (paymentError) console.error('Error releasing payment:', paymentError);
+          await fetch(`${supabaseUrl}/functions/v1/fraud-detection`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${session.session?.access_token || supabaseAnonKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId: order.id,
+              userId: user!.id,
+              action: 'delivery_completed',
+            }),
+          });
+        } catch (err) {
+          console.error('Error in delivery completion process:', err);
+        }
       }
 
       onUpdate();

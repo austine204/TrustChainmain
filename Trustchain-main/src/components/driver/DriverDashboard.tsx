@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { AvailableOrdersList } from './AvailableOrdersList';
 import { ActiveDeliveryCard } from './ActiveDeliveryCard';
+import { NotificationCenter } from '../shared/NotificationCenter';
 import type { Database } from '../../lib/database.types';
 
 type Delivery = Database['public']['Tables']['deliveries']['Row'] & {
@@ -74,13 +75,16 @@ export function DriverDashboard() {
             <h1 className="text-3xl font-bold text-white mb-2">Driver Dashboard</h1>
             <p className="text-slate-400">Welcome back, {profile?.full_name}</p>
           </div>
-          <button
-            onClick={() => signOut()}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </button>
+          <div className="flex items-center gap-3">
+            <NotificationCenter />
+            <button
+              onClick={() => signOut()}
+              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">

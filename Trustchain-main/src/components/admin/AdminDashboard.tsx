@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { FraudAlertsList } from './FraudAlertsList';
 import { SystemStatsPanel } from './SystemStatsPanel';
+import { NotificationCenter } from '../shared/NotificationCenter';
 import type { Database } from '../../lib/database.types';
 
 type FraudAlert = Database['public']['Tables']['fraud_alerts']['Row'];
@@ -111,13 +112,16 @@ export function AdminDashboard() {
             </h1>
             <p className="text-slate-400">System monitoring and fraud prevention</p>
           </div>
-          <button
-            onClick={() => signOut()}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </button>
+          <div className="flex items-center gap-3">
+            <NotificationCenter />
+            <button
+              onClick={() => signOut()}
+              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">

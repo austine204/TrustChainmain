@@ -6,6 +6,7 @@ import { CreateOrderModal } from './CreateOrderModal';
 import { OrderTrackingModal } from './OrderTrackingModal';
 import { RatingModal } from '../shared/RatingModal';
 import { InsuranceModal } from '../shared/InsuranceModal';
+import { NotificationCenter } from '../shared/NotificationCenter';
 import type { Database } from '../../lib/database.types';
 
 type Order = Database['public']['Tables']['orders']['Row'];
@@ -84,13 +85,16 @@ export function CustomerDashboard() {
             <h1 className="text-3xl font-bold text-white mb-2">Customer Dashboard</h1>
             <p className="text-slate-400">Welcome back, {profile?.full_name}</p>
           </div>
-          <button
-            onClick={() => signOut()}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </button>
+          <div className="flex items-center gap-3">
+            <NotificationCenter />
+            <button
+              onClick={() => signOut()}
+              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
