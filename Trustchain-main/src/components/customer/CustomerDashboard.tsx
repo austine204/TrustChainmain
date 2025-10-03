@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
-import { Package, Plus, MapPin, Clock, CheckCircle, XCircle, LogOut, Star, Shield } from 'lucide-react';
+import { Package, Plus, MapPin, Clock, CircleCheck as CheckCircle, Circle as XCircle, LogOut, Star, Shield } from 'lucide-react';
 import { CreateOrderModal } from './CreateOrderModal';
 import { OrderTrackingModal } from './OrderTrackingModal';
 import { RatingModal } from '../shared/RatingModal';

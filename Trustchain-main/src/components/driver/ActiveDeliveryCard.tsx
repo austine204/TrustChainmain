@@ -2,14 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGeolocation } from '../../hooks/useGeolocation';
-import {
-  MapPin,
-  Navigation,
-  CheckCircle,
-  Package as PackageIcon,
-  User,
-  Key,
-} from 'lucide-react';
+import { MapPin, Navigation, CircleCheck as CheckCircle, Package as PackageIcon, User, Key } from 'lucide-react';
 import type { Database } from '../../lib/database.types';
 
 type Delivery = Database['public']['Tables']['deliveries']['Row'] & {

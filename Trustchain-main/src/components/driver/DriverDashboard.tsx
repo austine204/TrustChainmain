@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
-import {
-  Package,
-  MapPin,
-  CheckCircle,
-  Clock,
-  Navigation,
-  LogOut,
-  Star,
-  Award,
-} from 'lucide-react';
+import { Package, MapPin, CircleCheck as CheckCircle, Clock, Navigation, LogOut, Star, Award } from 'lucide-react';
 import { AvailableOrdersList } from './AvailableOrdersList';
 import { ActiveDeliveryCard } from './ActiveDeliveryCard';
 import { NotificationCenter } from '../shared/NotificationCenter';

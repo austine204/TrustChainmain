@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
-import {
-  Shield,
-  AlertTriangle,
-  TrendingUp,
-  Users,
-  Package,
-  LogOut,
-  CheckCircle,
-  XCircle,
-} from 'lucide-react';
+import { Shield, TriangleAlert as AlertTriangle, TrendingUp, Users, Package, LogOut, CircleCheck as CheckCircle, Circle as XCircle } from 'lucide-react';
 import { FraudAlertsList } from './FraudAlertsList';
 import { SystemStatsPanel } from './SystemStatsPanel';
 import { NotificationCenter } from '../shared/NotificationCenter';
